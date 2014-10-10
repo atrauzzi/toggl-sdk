@@ -1,0 +1,18 @@
+{
+	"name": "atrauzzi/toggl-sdk",
+	"description": "A SDK presented as a domain library for interacting with the toggl API in PHP.",
+	"authors": [
+		{
+			"name": "Alexander Trauzzi",
+			"email": "atrauzzi@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=5.4.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"Atrauzzi\\TogglSdk\\Domain\\": "src/"
+		}
+	}
+}
