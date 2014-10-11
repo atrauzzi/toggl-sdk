@@ -1,7 +1,7 @@
 <?php namespace Atrauzzi\TogglSdk\Domain\Repository\Api {
 
 	use Symfony\Component\Serializer\Encoder\JsonEncoder;
-	use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+	use Atrauzzi\TogglSdk\Domain\Repository\Api\Normalizer\GetSetMethod as GetSetMethodNormalizer;
 	use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 	use Symfony\Component\Serializer\Serializer;
 	//
@@ -12,7 +12,7 @@
 	/**
 	 * Class Base
 	 *
-	 * Abstracts the toggl API lifecycle as a static utility library for repositories to communicate with.
+	 * Abstracts the toggl API lifecycle as a static utility library for repositories to use.
 	 *
 	 * @package Atrauzzi\TogglSdk\Repository\Api
 	 */
@@ -142,7 +142,11 @@
 		 * @return \Symfony\Component\Serializer\Serializer
 		 */
 		private static function getSerializer(NormalizerInterface $normalizer = null) {
-			return new Serializer([$normalizer ?: new GetSetMethodNormalizer()], [new JsonEncoder()]);
+
+			if(!$normalizer)
+				$normalizer = new GetSetMethodNormalizer();
+
+			return new Serializer([$normalizer], [new JsonEncoder()]);
 		}
 
 		/**
