@@ -1,10 +1,7 @@
 <?php namespace Atrauzzi\TogglSdk\Repository\Api {
 
-	use JMS\Serializer\Serializer;
-	//
 	use Guzzle\Http\Client;
 	use RuntimeException;
-	use Illuminate\Support\Str;
 
 
 	/**
@@ -18,6 +15,11 @@
 
 		/** @var \Guzzle\Http\Client */
 		private static $client;
+
+		/** @var \JMS\Serializer\Serializer */
+		private static $serializer;
+
+		//
 
 		/** @var string */
 		private static $baseUrl = 'https://www.toggl.com/api/v8';
@@ -34,8 +36,7 @@
 		/** @var string */
 		private static $cookie;
 
-		/** @var \JMS\Serializer\Serializer */
-		private static $serializer;
+		//
 
 		/** @var string */
 		protected static $entityClass;
@@ -74,15 +75,6 @@
 		 */
 		public static function setCookie($cookie) {
 			self::$cookie = $cookie;
-		}
-
-		/**
-		 * Sets the serializer instance to use. Make sure this is done!
-		 *
-		 * @param \JMS\Serializer\Serializer $serializer
-		 */
-		public static function setSerializer(Serializer $serializer) {
-			self::$serializer = $serializer;
 		}
 
 		//
