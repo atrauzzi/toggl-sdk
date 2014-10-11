@@ -1,4 +1,4 @@
-<?php namespace App\Domain\Repository\Toggl {
+<?php namespace Atrauzzi\TogglSdk\Domain\Repository\Api {
 
 	use Atrauzzi\TogglSdk\Domain\Repository\Project as ProjectRepository;
 	use Atrauzzi\TogglSdk\Domain\Project as ProjectModel;
