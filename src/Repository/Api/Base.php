@@ -80,6 +80,11 @@
 			self::$cookie = $cookie;
 		}
 
+		/**
+		 * Obtains a log of all requests sent to the toggl API.
+		 *
+		 * @return array
+		 */
 		public static function getLog() {
 			return self::$log;
 		}
