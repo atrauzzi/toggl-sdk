@@ -64,4 +64,4 @@ that you would like to contribute or suggest, please don't hesitate to open a gi
 
 ### Credits
 
-Toggl SDK is created and maintained by [Alexander Trauzzi](http://goo.gl/Bq49Bg)
+Toggl SDK is created and maintained by [Alexander Trauzzi](http://goo.gl/qWhdWz)
