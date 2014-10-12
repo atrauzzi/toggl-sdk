@@ -21,8 +21,6 @@
 		/** @var \Guzzle\Http\Client */
 		private static $client;
 
-		//
-
 		/** @var string */
 		private static $baseUrl = 'https://www.toggl.com/api/v8';
 
@@ -38,10 +36,13 @@
 		/** @var string */
 		private static $cookie;
 
+		/** @var array */
+		private static $log = [];
+
 		//
 
 		/** @var string */
-		protected static $entityClass;
+		protected $entityClass;
 
 		//
 		//
@@ -79,6 +80,10 @@
 			self::$cookie = $cookie;
 		}
 
+		public static function getLog() {
+			return self::$log;
+		}
+
 		//
 		//
 		//
@@ -91,8 +96,8 @@
 		 * @param null|string $data
 		 * @return null|array|bool|float|int|string
 		 */
-		protected final static function togglArray($endpoint, $method = 'GET', $data = null) {
-			return  json_decode(self::togglRaw($endpoint, $method, $data), true);
+		protected final function togglArray($endpoint, $data = null, $method = 'GET') {
+			return json_decode($this->togglRaw($endpoint, $data, $method), true);
 		}
 
 		/**
@@ -101,17 +106,23 @@
 		 * @param string $endpoint
 		 * @param string $method
 		 * @param null|mixed $data
-		 * @return mixed
+		 * @return void|mixed
 		 */
-		protected final static function togglData($endpoint, $method = 'GET', $data = null) {
+		protected final function togglData($endpoint, $data = null, $method = 'GET') {
 
-			$data = static::togglArray($endpoint, $method, $data);
+			$data = $this->togglArray($endpoint, $data, $method);
 
 			// Toggl returns data under a "data" key, which is not useful during deserialization.
-			if(count($data) == 1 && !empty($data['data']))
+			if(count($data) == 1 && !empty($data['data'])) {
 				$data = $data['data'];
-
-			return static::deserialize(json_encode($data));
+				return $this->deserialize(json_encode($data));
+			}
+			// Awaiting: https://github.com/symfony/symfony/pull/12066
+			elseif($data) {
+				return array_map(function ($entityData) {
+					return $this->deserialize(json_encode($entityData));
+				}, $data);
+			}
 
 		}
 
@@ -126,10 +137,10 @@
 		 * @param \Symfony\Component\Serializer\Normalizer\NormalizerInterface $normalizer
 		 * @return mixed
 		 */
-		private static function deserialize($data, NormalizerInterface $normalizer = null) {
-			return self
-				::getSerializer($normalizer)
-				->deserialize($data, static::$entityClass, 'json')
+		private function deserialize($data, NormalizerInterface $normalizer = null) {
+			return $this
+				->getSerializer($normalizer)
+				->deserialize($data, $this->getEntityClass(), 'json')
 			;
 		}
 
@@ -141,12 +152,39 @@
 		 * @param \Symfony\Component\Serializer\Normalizer\NormalizerInterface $normalizer
 		 * @return \Symfony\Component\Serializer\Serializer
 		 */
-		private static function getSerializer(NormalizerInterface $normalizer = null) {
+		private function getSerializer(NormalizerInterface $normalizer = null) {
 
 			if(!$normalizer)
 				$normalizer = new GetSetMethodNormalizer();
 
 			return new Serializer([$normalizer], [new JsonEncoder()]);
+
+		}
+
+		/**
+		 * Gets the fully qualified entity class corresponding to the current repository subclass.
+		 *
+		 * There's an opportunity here to save some mental overhead through a convention. That said,
+		 * you can always manually specify what entity class to use via the static attribute.
+		 *
+		 * @return string
+		 */
+		private function getEntityClass() {
+
+			if(!$this->entityClass) {
+
+				$parts = explode('\\', get_called_class());
+
+				$class = array_pop($parts);
+				while(array_pop($parts) and $parts[count($parts) - 1] != 'Domain');
+				$parts[] = $class;
+
+				$this->entityClass = implode('\\', $parts);
+
+			}
+
+			return $this->entityClass;
+
 		}
 
 		/**
@@ -157,7 +195,7 @@
 		 * @param array|object $data
 		 * @return string
 		 */
-		private static function togglRaw($endpoint, $method = 'GET', $data = null) {
+		private function togglRaw($endpoint, $data = null, $method = 'GET') {
 
 			if(!self::$client)
 				self::$client = new Client(self::$baseUrl);
@@ -187,7 +225,13 @@
 			switch($method) {
 
 				case 'GET':
+
 					$request = self::$client->get($endpoint, $headers);
+
+					if($data && is_array($data))
+						foreach($data as $key => $value)
+						$request->getQuery()->set($key, $value);
+					self::$log[] = $request;
 					break;
 
 				case 'POST':
@@ -200,6 +244,8 @@
 
 			}
 
+			self::$log[] = $request;
+
 			if(!$response = $request->send())
 				throw new RuntimeException('There was an error communicating with toggl.');
 
@@ -211,9 +257,11 @@
 					break;
 
 				case 401:
-					throw new RuntimeException(
-						'Authentication to the toggl API failed, verify your cookie or credentials.'
-					);
+					throw new RuntimeException('Authentication to the toggl API failed, verify your cookie or credentials.');
+					break;
+
+				case 404:
+					throw new RuntimeException('The entity or endpoint requested does not exist.');
 					break;
 
 				case 500:

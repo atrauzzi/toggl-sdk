@@ -7,24 +7,19 @@
 
 	class Workspace extends Base implements WorkspaceRepository {
 
-		/** @var string */
-		protected static $entityClass = 'Atrauzzi\TogglSdk\Domain\Workspace';
-
 		/**
 		 * @param int $id
 		 * @return null|\Atrauzzi\TogglSdk\Domain\Workspace
 		 */
 		public function getById($id) {
-
-			return self::togglData('workspaces/' . $id);
-
+			return $this->togglData('workspaces/' . $id);
 		}
 
 		/**
 		 * @return \Atrauzzi\TogglSdk\Domain\Workspace[]
 		 */
 		public function index() {
-			// TODO: Implement index() method.
+			return $this->togglData('workspaces');
 		}
 
 		/**

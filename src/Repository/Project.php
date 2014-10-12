@@ -12,12 +12,10 @@
 		public function getById($id);
 
 		/**
-		 * @param int $limit
-		 * @param int $before
-		 * @param int $after
+		 * @param null|int|array $workspaceIds
 		 * @return \Atrauzzi\TogglSdk\Domain\Project[]
 		 */
-		public function index($limit, $before = null, $after = null);
+		public function index($workspaceIds = null);
 
 		/**
 		 * @param \Atrauzzi\TogglSdk\Domain\Project $project
