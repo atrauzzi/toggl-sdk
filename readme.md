@@ -18,7 +18,7 @@ that extending it is a snap.
 ## Configuring
 
 Before making calls against the library, be sure to call one of the following static methods on
-`Atrauzzi\TogglSdk\Domain\Repository\Api\Base`.  This can normally be done somehwere from within your
+`Atrauzzi\TogglSdk\Domain\Repository\Api\Base`.  This can normally be done somewhere from within your
 framework's bootstrap where configuration is parsed.
 
 ### ::setApiToken($apiToken)
@@ -62,6 +62,6 @@ implement or see prioritized, please let me know!*
 The documentation and some of the functionality in this library is still evolving.  If there's a feature or improvement
 that you would like to contribute or suggest, please don't hesitate to open a github ticket! :)
 
-### Credits
+## Credits
 
 Toggl SDK is created and maintained by [Alexander Trauzzi](http://goo.gl/qWhdWz)
