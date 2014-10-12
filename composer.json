@@ -1,6 +1,6 @@
 {
 	"name": "atrauzzi/toggl-sdk",
-	"description": "A SDK presented as a domain library for interacting with the toggl API in PHP.",
+	"description": "Lightweight and unobtrusive domain library pointed at the V8 toggl API.",
 	"authors": [
 		{
 			"name": "Alexander Trauzzi",
@@ -9,8 +9,8 @@
 	],
 	"require": {
 		"php": ">=5.4.0",
-        "guzzle/guzzle": "3.*",
-        "symfony/serializer": "2.5.*"
+		"guzzle/guzzle": "3.*",
+		"symfony/serializer": "2.5.*"
 	},
 	"autoload": {
 		"psr-4": {
