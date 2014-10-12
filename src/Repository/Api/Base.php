@@ -55,7 +55,6 @@
 		 */
 		public static function setApiToken($apiToken) {
 			self::$apiToken = $apiToken;
-			self::$cookie = null;
 		}
 
 		/**
