@@ -237,6 +237,7 @@
 						foreach($data as $key => $value)
 						$request->getQuery()->set($key, $value);
 					self::$log[] = $request;
+
 					break;
 
 				case 'POST':

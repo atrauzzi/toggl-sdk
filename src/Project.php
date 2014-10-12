@@ -5,8 +5,38 @@
 		/** @var int */
 		protected $id;
 
+		/** @var int */
+		protected $wid;
+
+		/** @var int */
+		protected $cid;
+
+		/** @var string */
+		protected $name;
+
 		/** @var boolean */
-		protected $archived;
+		protected $billable;
+
+		/** @var boolean */
+		protected $isPrivate;
+
+		/** @var boolean */
+		protected $autoEstimates;
+
+		/** @var boolean */
+		protected $active;
+
+		/** @var boolean */
+		protected $template;
+
+		/** @var string */
+		protected $color;
+
+		/** @var string */
+		protected $at;
+
+		/** @var string */
+		protected $createdAt;
 
 		/**
 		 * @return int
@@ -23,17 +53,157 @@
 		}
 
 		/**
-		 * @return boolean
+		 * @return int
 		 */
-		public function isArchived() {
-			return $this->archived;
+		public function getWid() {
+			return $this->wid;
 		}
 
 		/**
-		 * @param boolean $archived
+		 * @param int $wid
 		 */
-		public function setArchived($archived) {
-			$this->archived = $archived;
+		public function setWid($wid) {
+			$this->wid = $wid;
+		}
+
+		/**
+		 * @return int
+		 */
+		public function getCid() {
+			return $this->cid;
+		}
+
+		/**
+		 * @param int $cid
+		 */
+		public function setCid($cid) {
+			$this->cid = $cid;
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getName() {
+			return $this->name;
+		}
+
+		/**
+		 * @param string $name
+		 */
+		public function setName($name) {
+			$this->name = $name;
+		}
+
+		/**
+		 * @return boolean
+		 */
+		public function isBillable() {
+			return $this->billable;
+		}
+
+		/**
+		 * @param boolean $billable
+		 */
+		public function setBillable($billable) {
+			$this->billable = $billable;
+		}
+
+		/**
+		 * @return boolean
+		 */
+		public function isIsPrivate() {
+			return $this->isPrivate;
+		}
+
+		/**
+		 * @param boolean $isPrivate
+		 */
+		public function setIsPrivate($isPrivate) {
+			$this->isPrivate = $isPrivate;
+		}
+
+		/**
+		 * @return boolean
+		 */
+		public function isAutoEstimates() {
+			return $this->autoEstimates;
+		}
+
+		/**
+		 * @param boolean $autoEstimates
+		 */
+		public function setAutoEstimates($autoEstimates) {
+			$this->autoEstimates = $autoEstimates;
+		}
+
+		/**
+		 * @return boolean
+		 */
+		public function isActive() {
+			return $this->active;
+		}
+
+		/**
+		 * @param boolean $active
+		 */
+		public function setActive($active) {
+			$this->active = $active;
+		}
+
+		/**
+		 * @return boolean
+		 */
+		public function isTemplate() {
+			return $this->template;
+		}
+
+		/**
+		 * @param boolean $template
+		 */
+		public function setTemplate($template) {
+			$this->template = $template;
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getColor() {
+			return $this->color;
+		}
+
+		/**
+		 * @param string $color
+		 */
+		public function setColor($color) {
+			$this->color = $color;
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getAt() {
+			return $this->at;
+		}
+
+		/**
+		 * @param string $at
+		 */
+		public function setAt($at) {
+			$this->at = $at;
+		}
+
+		/**
+		 * @return string
+		 */
+		public function getCreatedAt() {
+			return $this->createdAt;
+		}
+
+		/**
+		 * @param string $createdAt
+		 */
+		public function setCreatedAt($createdAt) {
+			$this->createdAt = $createdAt;
 		}
 
 	}
