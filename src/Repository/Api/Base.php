@@ -53,7 +53,7 @@
 		 *
 		 * @param string $apiToken
 		 */
-		public static function setApiToken($apiToken) {
+		public final static function setApiToken($apiToken) {
 			self::$apiToken = $apiToken;
 		}
 
@@ -63,7 +63,7 @@
 		 * @param string $username
 		 * @param string $password
 		 */
-		public static function setCredentials($username, $password) {
+		public final static function setCredentials($username, $password) {
 			self::$username = $username;
 			self::$password = $password;
 		}
@@ -75,7 +75,7 @@
 		 *
 		 * @param $cookie
 		 */
-		public static function setCookie($cookie) {
+		public final static function setCookie($cookie) {
 			self::$cookie = $cookie;
 		}
 
@@ -84,7 +84,7 @@
 		 *
 		 * @return array
 		 */
-		public static function getLog() {
+		public final static function getLog() {
 			return self::$log;
 		}
 
