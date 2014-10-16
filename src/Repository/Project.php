@@ -9,7 +9,7 @@
 		 * @param int $id
 		 * @return \Atrauzzi\TogglSdk\Domain\Project
 		 */
-		public function getById($id);
+		public function find($id);
 
 		/**
 		 * @param null|int|array $workspaceIds

@@ -11,7 +11,7 @@
 		 * @param int $id
 		 * @return null|\Atrauzzi\TogglSdk\Domain\Workspace
 		 */
-		public function getById($id) {
+		public function find($id) {
 			return $this->togglData('workspaces/' . $id);
 		}
 

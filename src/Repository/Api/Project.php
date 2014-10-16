@@ -25,7 +25,7 @@
 		 * @param int $id
 		 * @return \Atrauzzi\TogglSdk\Domain\Project
 		 */
-		public function getById($id) {
+		public function find($id) {
 			return $this->togglData('projects/' . $id);
 		}
 
@@ -39,7 +39,7 @@
 
 			if(!count($workspaceIds)) $workspaceIds = array_map(function (WorkspaceModel $workspace) {
 				return $workspace->getId();
-			}, $this->workspaceRepository->index())	;
+			}, $this->workspaceRepository->index());
 
 			$projects = [];
 			foreach($workspaceIds as $workspaceId) {
