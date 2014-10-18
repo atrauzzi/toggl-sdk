@@ -1,8 +1,8 @@
 # Toggl SDK
 
-Lightweight and unobtrusive domain library pointed at the V8 toggl API.
+A domain library pointed at the V8 toggl API.
 
-If you are looking for a low-coupling option to integrate toggl into your project or are considering extending
+If you are looking for a portable option to integrate toggl into your project or are considering extending
 their domain, this library could be of some use to you!
 
 This library maintains minimal dependencies and attempts to be as well documented and designed as possible so
@@ -44,11 +44,11 @@ instantiate the repositories, or request them via your dependency injection cont
 ## Extending
 
 If for any reason you wish to extend the default toggl domain, your best option will be to depend on this package
-from either your project or another portable library.  From there you can subclass the model and repository structure
-excluding utility classes.
+from either your project or another portable library.  From there you can subclass the models and repository interfaces
+and compose the original repositories to talk to the API.
 
-When performing save and load operations, your subclasses can still access the toggl API by calling parent methods
-remaining fully capable of fulfilling the base package's repository interfaces. All things considered, this is pretty
+When performing operations, your subclasses can then still access the toggl API by calling the composed instances'
+methods, while remaining compatible with this package's repository interfaces. All things considered, this is pretty
 straightforward and will ensure that you remain compatible with the SDK.
 
 And of course, don't forget to add new repository interfaces and model attributes of your own in your package/project!

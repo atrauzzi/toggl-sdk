@@ -1,6 +1,6 @@
 {
 	"name": "atrauzzi/toggl-sdk",
-	"description": "Lightweight and unobtrusive domain library pointed at the V8 toggl API.",
+	"description": "A domain library pointed at the V8 toggl API.",
 	"authors": [
 		{
 			"name": "Alexander Trauzzi",
