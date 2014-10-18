@@ -209,7 +209,7 @@
 			];
 
 			if(self::$cookie) {
-				$headers['Cookie'] = sprintf('toggl_api_session=%s', self::$cookie);
+				$headers['Cookie'] = sprintf('toggl_api_session_new=%s', self::$cookie);
 			}
 			else {
 
