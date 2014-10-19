@@ -111,21 +111,21 @@
 		/**
 		 * @return boolean
 		 */
-		public function isIsPrivate() {
+		public function isPrivate() {
 			return $this->isPrivate;
 		}
 
 		/**
 		 * @param boolean $isPrivate
 		 */
-		public function setIsPrivate($isPrivate) {
+		public function setPrivate($isPrivate) {
 			$this->isPrivate = $isPrivate;
 		}
 
 		/**
 		 * @return boolean
 		 */
-		public function isAutoEstimates() {
+		public function getAutoEstimates() {
 			return $this->autoEstimates;
 		}
 
