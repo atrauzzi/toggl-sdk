@@ -97,7 +97,7 @@
 		/**
 		 * @return boolean
 		 */
-		public function isBillable() {
+		public function getBillable() {
 			return $this->billable;
 		}
 
@@ -111,14 +111,14 @@
 		/**
 		 * @return boolean
 		 */
-		public function isPrivate() {
+		public function getIsPrivate() {
 			return $this->isPrivate;
 		}
 
 		/**
 		 * @param boolean $isPrivate
 		 */
-		public function setPrivate($isPrivate) {
+		public function setIsPrivate($isPrivate) {
 			$this->isPrivate = $isPrivate;
 		}
 
@@ -139,7 +139,7 @@
 		/**
 		 * @return boolean
 		 */
-		public function isActive() {
+		public function getActive() {
 			return $this->active;
 		}
 
@@ -153,7 +153,7 @@
 		/**
 		 * @return boolean
 		 */
-		public function isTemplate() {
+		public function getTemplate() {
 			return $this->template;
 		}
 
