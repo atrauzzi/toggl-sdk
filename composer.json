@@ -10,7 +10,7 @@
 	"require": {
 		"php": ">=5.4.0",
 		"guzzle/guzzle": "3.*",
-		"symfony/serializer": "2.5.*"
+		"atrauzzi/domain-tool": "dev-master"
 	},
 	"autoload": {
 		"psr-4": {

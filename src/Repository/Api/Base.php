@@ -1,10 +1,6 @@
 <?php namespace Atrauzzi\TogglSdk\Domain\Repository\Api {
 
-	use Symfony\Component\Serializer\Encoder\JsonEncoder;
-	use Atrauzzi\TogglSdk\Domain\Repository\Api\Normalizer\GetSetMethod as GetSetMethodNormalizer;
-	use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
-	use Symfony\Component\Serializer\Serializer;
-	//
+	use Atrauzzi\DomainTool\Service as DomainTool;
 	use Guzzle\Http\Client;
 	use RuntimeException;
 
@@ -119,12 +115,12 @@
 			// Toggl returns data under a "data" key, which is not useful during deserialization.
 			if(count($data) == 1 && !empty($data['data'])) {
 				$data = $data['data'];
-				return $this->deserialize(json_encode($data));
+				return $this->deserialize($data);
 			}
 			// Awaiting: https://github.com/symfony/symfony/pull/12066
 			elseif($data) {
 				return array_map(function ($entityData) {
-					return $this->deserialize(json_encode($entityData));
+					return $this->deserialize($entityData);
 				}, $data);
 			}
 
@@ -138,31 +134,10 @@
 		 * Plug this entire system into Serializer to support automatic mapping of JSON to domain objects.
 		 *
 		 * @param mixed $data
-		 * @param \Symfony\Component\Serializer\Normalizer\NormalizerInterface $normalizer
 		 * @return mixed
 		 */
-		private function deserialize($data, NormalizerInterface $normalizer = null) {
-			return $this
-				->getSerializer($normalizer)
-				->deserialize($data, $this->getEntityClass(), 'json')
-			;
-		}
-
-		/**
-		 * Prepares a serializer for the current subclass.
-		 *
-		 * Deserialization can be customized by supplying a normalizer.
-		 *
-		 * @param \Symfony\Component\Serializer\Normalizer\NormalizerInterface $normalizer
-		 * @return \Symfony\Component\Serializer\Serializer
-		 */
-		private function getSerializer(NormalizerInterface $normalizer = null) {
-
-			if(!$normalizer)
-				$normalizer = new GetSetMethodNormalizer();
-
-			return new Serializer([$normalizer], [new JsonEncoder()]);
-
+		private function deserialize($data) {
+			return DomainTool::create($data, $this->getEntityClass());
 		}
 
 		/**
